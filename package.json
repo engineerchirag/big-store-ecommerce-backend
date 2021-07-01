@@ -15,5 +15,8 @@
     "morgan": "~1.9.1",
     "netlify-lambda": "^2.0.10",
     "serverless-http": "^2.7.0"
+  },
+  "devDependencies": {
+    "@vercel/node": "^1.11.1"
   }
 }
