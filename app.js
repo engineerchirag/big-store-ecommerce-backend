@@ -39,5 +39,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.use('/.netlify/functions/server', router);
+
 module.exports = app;
 module.exports.handler = serverless(app);
