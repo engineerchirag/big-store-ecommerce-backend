@@ -1,13 +1,13 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var serverless = require('serverless-http');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var router = express.Router()
+// var serverless = require('serverless-http');
+// var router = express.Router()
 
 var app = express();
 
@@ -21,9 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-router.use('/', indexRouter);
-router.use('/users', usersRouter);
-app.use('/.netlify/functions/index', router);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+// app.use('/.netlify/functions/index', router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,4 +42,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-module.exports.handler = serverless(app);
+// module.exports.handler = serverless(app);
