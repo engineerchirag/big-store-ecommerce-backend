@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "netlify-lambda serve src",
-    "build": "netlify-lambda build src"
+    "start:netlify": "netlify-lambda serve src",
+    "build:netlify": "netlify-lambda build src",
+    "build:vercel": "node src/index.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,8 +16,5 @@
     "morgan": "~1.9.1",
     "netlify-lambda": "^2.0.10",
     "serverless-http": "^2.7.0"
-  },
-  "devDependencies": {
-    "@vercel/node": "^1.11.1"
   }
 }
