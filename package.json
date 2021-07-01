@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build": "netlify-lambda build ./bin/www"
+    "build": "netlify-lambda build ./"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
