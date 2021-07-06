@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "start:netlify": "netlify-lambda serve src",
     "build:netlify": "netlify-lambda build src",
     "build:vercel": "node src/index.js"
@@ -16,6 +16,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "netlify-lambda": "^2.0.10",
+    "nodemon": "^2.0.9",
     "serverless-http": "^2.7.0"
   }
 }

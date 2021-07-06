@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../index');
+var app = require('../src/index');
 var debug = require('debug')('big-store-ecommerce-backend:server');
 var http = require('http');
 
