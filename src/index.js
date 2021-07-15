@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var homeRouter = require('./routes/home');
 var { authentication } = require('./middleware/authentication');
+require('dotenv').config();
+var mongoose = require("mongoose")
 // var serverless = require('serverless-http');
 // var router = express.Router()
 
@@ -33,6 +35,20 @@ app.use('/', homeRouter);
 app.use('/user', usersRouter);
 app.use('/product', authentication, indexRouter);
 // app.use('/.netlify/functions/index', router);
+
+const DB = process.env.DATABASE.replace(
+  '<password>',
+  process.env.DATABASE_PASSWORD
+);
+
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
+  .then(() => console.log('DB connnection successful!'))
+  .catch((err) => console.log(err));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,40 +1,31 @@
 var express = require('express');
 var router = express.Router();
 var { authentication } = require('../middleware/authentication');
+const mongoose = require("mongoose");
+var User = require('../models/user');
+
 
 /* GET users listing. */
 router.get('/list', function(req, res, next) {
-  res.send([{
-    "id": 1,
-    "firstName": "Alok",
-    "lastName": "Kumar",
-  }, {
-    "id": 2,
-    "firstName": "Meet",
-    "lastName": "Mishra",
-  }]);
+  User
+    .find()
+    .then(users => res.send(users))
+    .catch(err => res.send({ type: "Error", message: err}));
 });
 
 router.put('/:userId', authentication, function(req, res, next) {
-    console.log(req.params, req.body);
-    var userId = req.params.userId;
-    try {
-      // Update data in database
-      // API: www.user.com/createUser
-      res.send({ ...req.body, id: userId });
-    } catch(e) {
-      res.send({ error: e });
-    }
+  var userId = req.params.userId;
+  User.findByIdAndUpdate(userId, req.body, {new: true})
+    .then(user => res.send(user))
+    .catch(err => res.send({ type: "Error", message: err}));
 });
 
-router.post('/', authentication, function(req, res, next) {
-  console.log(req.body);
-  var userId = Math.random(); // Save data in database and get userId
-  var updatedUserDetail = {
-    ...req.body,
-    id: userId,
-  };
-  res.send(updatedUserDetail);
+router.post('/', function(req, res, next) {
+  const savedUser = new User(req.body);
+  savedUser
+    .save()
+    .then(user => res.send(user))
+    .catch(err => res.send({ type: "Error", message: err}));
 });
 
 module.exports = router;
